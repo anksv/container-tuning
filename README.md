@@ -11,7 +11,7 @@ python monitor.go [OPTIONS]
 	-h, --help            This page
 
 
-#throttle.py
+#throttle.go
 
 ##Description:
   Set the download or upload speed limit of a container using tc and container's network namespace.
@@ -25,7 +25,7 @@ python throttle.go CONTAINER_NAME [OPTIONS]
 	-c, --clean                    Clean the speed limits
 	-h, --help                     This page
 
-#weighted.py
+#weighted.go
 
 ##Description:
   Throttle container's bandwidth based on weighted shares.
