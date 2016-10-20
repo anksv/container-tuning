@@ -1,10 +1,10 @@
 #monitor.go
 
 ##Description:
-  Monitor running docker container's network bandwidth and report to elasticsearch server.
+  Monitoring running docker container's network bandwidth and report to elasticsearch server.
 
 ##Usage:
-python monitor.go [OPTIONS]
+monitor.go [OPTIONS]
 
 ##Options:
 	-n, --name            Only monitor the container with given name
@@ -17,7 +17,7 @@ python monitor.go [OPTIONS]
   Set the download or upload speed limit of a container using tc and container's network namespace.
 
 ##Usage:
-python throttle.go CONTAINER_NAME [OPTIONS]
+throttle.go CONTAINER_NAME [OPTIONS]
 
 ##Options:
 	-d, --download    #kmKM        Set download speed limit in specified unit
@@ -31,7 +31,7 @@ python throttle.go CONTAINER_NAME [OPTIONS]
   Throttle container's bandwidth based on weighted shares.
 
 ##Usage:
-python weighted.go [-f filename]
+weighted.go [-f filename]
 
 ##Options:
 	-f, --file        Read configuration from specified file
