@@ -1,7 +1,7 @@
 #monitor.go
 
 ##Description:
-  Monitoring running docker container's network bandwidth and report to elasticsearch server.
+  Monitoring running docker container's network bandwidth
 
 ##Usage:
 sudo run monitor.go
