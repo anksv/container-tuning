@@ -144,4 +144,8 @@ func allot_netwwork_share(finalmap map[string]string, rnb int) {
 
 
 }
-
+	func main() {
+	        //Pass a map whose keys are container and value as network share , bandwidth to be distributed
+		allot_netwwork_share(finalmap, bandwidth)
+		
+	}
