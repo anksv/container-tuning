@@ -86,7 +86,7 @@ func link_netns(finalmap map[string]string){
       inspect_data := []string{"docker" , "inspect", cid}
       result := process_cmd(inspect_data)
 	  
-      //TBD : if result is empty remove the key from map
+	    if result != "" {
 	  
       b := []byte(result)
 
@@ -103,12 +103,45 @@ func link_netns(finalmap map[string]string){
       symb_link := []string{ "sudo", "ln", "-s", "/proc/", _pid, "/ns/net", "/var/run/netns/", cname}
       process_cmd(rm_dir)
       process_cmd(symb_link)
+	    }else{
+		    delete(finalmap,cid)
+		    continue
+	    }
 
     }
 
 }
 
-func allot_network_share( finalmap map[string]string){
+func allot_netwwork_share(finalmap map[string]string, rnb int) {
+     
+    total := 100
+    //total = rnb
+
+	link_netns(finalmap)
+
+	total_weight := 0
+
+	for key,_ := range finalmap {
+		 val,_ := strconv.Atoi(finalmap[key])
+		 total_weight += val
+	}
+
+	for cid,_ := range finalmap {
+
+		veth := get_veth(cid)
+                v,_ := strconv.Atoi(finalmap[cid])
+		drate := total * 1024 * 1024 * v / total_weight
+		_drate := strconv.Itoa(drate)
+        d := drate/250
+		_d := strconv.Itoa(d)
+
+		del_cmd := []string{"sudo" , "tc" , "qdisc" ,  "del" ,  "dev" , veth, "root"}
+		add_cmd := []string{"sudo" , "tc" ,  "qdisc" ,  "add" ,  "dev" , veth, "root", "tbf", "rate", _drate, "bit latency 50ms burst", _d}
+
+		process_cmd(del_cmd)
+
+		process_cmd(add_cmd)
+
 
 }
 
